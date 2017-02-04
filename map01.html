@@ -1,0 +1,240 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>ごみ処理施設の予定地、浄水場と汚水の流れ</title>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+<style>
+  body {padding: 0; margin: 0}
+  html, body, #mapdiv {height: 100%; width: 100%;}
+  .leaflet-container {background: #fff;}
+  .leaflet-div-icon {background: none;white-space: nowrap;border:none;}
+</style>
+</head>
+
+
+<body>
+<div id="mapdiv">
+<script>
+function geojson_style(prop) {
+  var s = {};
+  for(name in prop) {
+    if(name.match(/^_/) && !name.match(/_markerType/)){
+      if( prop['_markerType']=='Circle' && name =='_radius'){continue;}
+      s[name.substr(1)]=prop[name];
+    }
+  }
+  return s;
+}
+
+function popup_properties(prop) {
+  var s = ''
+  for(name in prop) {
+    if(!name.match(/^_/)){
+      s += prop[name] + "<br>";
+    }
+  }
+  return s;
+}
+
+// スタイルつき GeoJSONを「var descriptiondata = 」に続けて記載
+// 末尾の「}」の直後に「;」が必要
+var geojsonData = 
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "飯谷町ごみ処理施設予定地",
+        "_markerType": "Icon",
+        "_iconUrl": "http://cyberjapandata.gsi.go.jp/portal/sys/v4/symbols/080.png",
+        "_iconSize": [
+          20,
+          20
+        ],
+        "_iconAnchor": [
+          10,
+          10
+        ]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.54192698001862,
+          33.98415911440692
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "田浦浄水場",
+        "_markerType": "Icon",
+        "_iconUrl": "http://cyberjapandata.gsi.go.jp/portal/sys/v4/symbols/080.png",
+        "_iconSize": [
+          20,
+          20
+        ],
+        "_iconAnchor": [
+          10,
+          10
+        ]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          134.55171704292297,
+          33.997898287436755
+        ]
+      }
+    }
+  ]
+};
+
+
+//スタイルつき GeoJSON読み込み
+var descriptionLayer = L.geoJson(geojsonData, {
+  pointToLayer: function (feature, latlng) {
+    var s = geojson_style(feature.properties);
+    if(feature.properties['_markerType']=='Icon'){
+      var myIcon = L.icon(s);
+      return L.marker(latlng, {icon: myIcon});
+    }
+    if(feature.properties['_markerType']=='DivIcon'){
+      var myIcon = L.divIcon(s);
+      return L.marker(latlng, {icon: myIcon});
+    }
+    if(feature.properties['_markerType']=='Circle'){
+      return L.circle(latlng,feature.properties['_radius'],s);
+    }
+    if(feature.properties['_markerType']=='CircleMarker'){
+      return L.circleMarker(latlng,s);
+    }
+  },
+  style: function (feature) {
+    if(!feature.properties['_markerType']){
+      var s = geojson_style(feature.properties);
+      return s;
+    }
+  },
+  onEachFeature: function (feature, layer) {
+    layer.bindPopup(popup_properties(feature.properties));
+  }
+});
+
+//スタイルつき GeoJSON読み込み
+var waterflowLayer = L.geoJson({
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "雨水の流れ",
+        "_color": "skyblue",
+        "_opacity": 0.5,
+        "_weight": 6
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+[[134.54434633255005,33.98333175758865],[134.54377770423886,33.982869145964784]],
+[[134.54434633255005,33.98333175758865],[134.54391717910767,33.98388332969567]],
+[[134.54434633255005,33.98333175758865],[134.53949689865112,33.98391891486998]]
+]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "川と地下水の流れ",
+        "_color": "lightgreen",
+        "_opacity": 0.5,
+        "_weight": 15
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+ [[134.54432487487793,33.98333175758865],[134.54947471618652,33.99952157808615]],
+         [
+          [
+            134.5487505197525,
+            33.999112422819046
+          ],
+          [
+            134.54947471618652,
+            33.99952157808615
+          ],
+          [
+            134.5498502254486,
+            33.99891673916855
+          ]
+        ]
+       ]
+      }
+    }
+  ]
+},{
+  pointToLayer: function (feature, latlng) {
+    var s = geojson_style(feature.properties);
+    if(feature.properties['_markerType']=='Icon'){
+      var myIcon = L.icon(s);
+      return L.marker(latlng, {icon: myIcon});
+    }
+    if(feature.properties['_markerType']=='DivIcon'){
+      var myIcon = L.divIcon(s);
+      return L.marker(latlng, {icon: myIcon});
+    }
+    if(feature.properties['_markerType']=='Circle'){
+      return L.circle(latlng,feature.properties['_radius'],s);
+    }
+    if(feature.properties['_markerType']=='CircleMarker'){
+      return L.circleMarker(latlng,s);
+    }
+  },
+  style: function (feature) {
+    if(!feature.properties['_markerType']){
+      var s = geojson_style(feature.properties);
+      return s;
+    }
+  },
+  onEachFeature: function (feature, layer) {
+    layer.bindPopup(popup_properties(feature.properties));
+  }
+});
+//背景地図設定
+var std = L.tileLayer(
+  'http://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png',
+  {
+    attribution: "<a href='http://maps.gsi.go.jp/development/ichiran.html#std' target='_blank'>地理院タイル（標準地図）</a>", 
+    maxNativeZoom: 18,
+    maxZoom: 18,
+    opacity:1
+  }
+);
+var ort = L.tileLayer(
+  'http://cyberjapandata.gsi.go.jp/xyz/ort/{z}/{x}/{y}.jpg',
+  {
+    attribution: "<a href='http://maps.gsi.go.jp/development/ichiran.html#ort' target='_blank'>地理院タイル（写真）</a>", 
+    maxNativeZoom: 18,
+    maxZoom: 18,
+    opacity:1
+  }
+);
+var map = L.map('mapdiv', {
+  center: [33.994000,134.550000], zoom: 14, layers: [std,ort,descriptionLayer, waterflowLayer]
+});
+
+L.control.scale({imperial: false}).addTo(map);
+var baseLayers = {"地理院タイル（標準地図）": std,"地理院タイル（写真）": ort};
+var overlays = {'ごみ処理施設と浄水施設': descriptionLayer,
+                '水の流れ': waterflowLayer };
+L.control.layers(baseLayers, overlays,{position:'topright',collapsed:false}).addTo(map);
+</script>
+</body>
+
+</html>
+
