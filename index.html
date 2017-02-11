@@ -56,7 +56,9 @@ figure {
   padding-left: 8px;
   padding-right: 8px;
   border: thin solid grey;
-s            }
+  box-shadow:7px 10px 8px -13px #1e1a1e;
+
+}
 
 img {
   margin:0;
@@ -101,6 +103,16 @@ h1 span {
   display: block;
   font-size: 50%;
 }
+
+
+h2 {
+  padding-bottom: 0.3em;
+  padding-top: 0.3em;
+  padding-left: 0.5em;
+  border-bottom: thin solid gray;
+  border-left: 8px solid gray;
+}
+
   </style>
 </head>
 <body>
@@ -217,9 +229,9 @@ h1 span {
   <h3>選定基準</h3>
   <figure>
     <img src="./img/epa.jpg" width="320" height="169">
-    <figcaption><p>橘湾の最奥にできたエコパーク阿南(2014年-)</p><p class="photocredit"><a href="http://www.city.anan.tokushima.jp/docs/2010091700022/">Source</a></p></figcaption>
+    <figcaption><p>橘湾のエコパーク阿南(2014年-)</p><p class="photocredit"><a href="http://www.city.anan.tokushima.jp/docs/2010091700022/">Source</a></p></figcaption>
   </figure>
-  <p>徳島市の選定委員会が出した結論には、不可解な点がいくつかあります。徳島新聞の報道によれば、選定委員は「環境への配慮」、「有事の際の安全性」、「コスト的負担」の3つの面を基準にして選定された、としていますが、この3つの点には、どれも問題があります。</p>
+  <p>徳島市の選定委員会が出した結論には、不可解な点がいくつかあります。徳島新聞の報道によれば、選定委員は「環境への配慮」、「有事の際の安全性」、「財政負担」の3つの面を基準にして選定された、としていますが、この3つの点には、どれも問題があります。</p>
 
   <p>まず、環境についてですが、論田町から飯谷町に施設を移すのは、単純にいうと、勝浦川の下流にあるごみ焼却場を上流に移すということです。フェニックス計画が実施された大阪湾や夢の島がある東京湾など、他都道府県の例を見ても分かるように、ごみ処理は下流で行い、やむを得ない分は埋め立てて港湾として利用するのが大原則です。同じ川の上流に配置した方が環境に優しくなるという論理は、いくらなんでも無理があります。</p>
 
@@ -276,8 +288,6 @@ h1 span {
   <p>この文書は、小松島市の水の問題について広く知ってもらうために、急いで作られたものです。そういった事情ですから、書き間違いなどがある程度含まれていることは想像に難くありません。不手際については、前もってお詫びをしておく所存です。</p>
 
   <p>さらに言うと、たしかに急いではいたのですが、この文書をタイプしながら、もう遅すぎるのでないか、という思いもあります。ですから、そもそもこの文書を書き始めるのが遅かった点については、なんとも申し訳のしようがない次第です。ことに、この問題の影響を直接受ける将来の世代にあたる小松島市民にはあらかじめ謝罪しておきます。この遅れのせいで満足のいく落とし所まで漕ぎ着けなかったらすみません。</p>
-
-  <hr>
 
   <h2>参考資料</h2>
   <ul>
@@ -381,7 +391,6 @@ h1 span {
   <div>廃棄物処理施設整備計画<br><a href="http://www.env.go.jp/press/files/jp/22341.pdf">http://www.env.go.jp/press/files/jp/22341.pdf</a></div>
   </li>
   </ul>
-  <hr>
   <h2>この文書について</h2>
   <p>この文書の内容についてご意見・ご感想などがありましたら、メールで<a href="mailto:komatsushimawater@gmail.com">komatsushimawater@gmail.com</a>または、Twitterで@KmtsmWtr(<a href="https://twitter.com/KmtsmWtr">https://twitter.com/KmtsmWtr</a>)までお寄せください。ハッシュタグは「#小松島の水問題」にしようと思っています。</p>
   <p>再編集・印刷・再配布に関しては大いに歓迎するところです。</p>
@@ -480,17 +489,18 @@ function(aNode) {
 }, false);
 while(tw.nextNode()){}
 var figure = document.createElement("div");
-var caption = document.createElement("figcaption");
-caption.textContent = "目次";
+var caption = document.createElement("div");
+caption.textContent = "もくじ";
 caption.id = "indexcap";
-figure.appendChild(caption);
-figure.style = "text-align:left;float:left;border:thin solid skyblue;" +
-               "margin-bottom: 1em;";
-caption.style = "text-align:center;cursor:pointer;min-width:25em;color:blue;";
+figure.style.cssText = "text-align:left;float:left;border:thin solid skyblue;" +
+               "margin-bottom: 1em;box-shadow:10px 11px 8px -7px #696e82;";
+caption.style.cssText = "text-align:center;cursor:pointer;min-width:25em;"+
+                        "color:blue;background-color:#eef;font-family:serif;padding:0.1em";
 caption.addEventListener("click", function (aEvent) {
   var list = document.getElementById("indexcap").nextSibling;
   list.classList.toggle("indexListDisplayNone");
 }, false);
+figure.appendChild(caption);
 hc.mRootList.classList.add("indexListDisplayNone");
 figure.appendChild(hc.mRootList);
 
