@@ -93,6 +93,7 @@ h1 {
   padding-bottom: 0.5em;
   border-bottom: thin solid gray;
   text-align: center;
+  text-shadow :0px 3px 5px #525356;
 }
 
 h1:first-letter {
@@ -493,7 +494,7 @@ var caption = document.createElement("div");
 caption.textContent = "目次";
 caption.id = "indexcap";
 figure.style.cssText = "text-align:left;float:left;border:thin solid skyblue;" +
-               "margin-bottom: 1em;box-shadow:10px 11px 8px -7px #696e82;";
+               "margin-bottom: 1em;box-shadow:0px 7px 5px -7px #525356;";
 caption.style.cssText = "text-align:center;cursor:pointer;min-width:25em;"+
                         "color:blue;background-color:#eef;font-weight:bold;padding:0.1em";
 caption.addEventListener("click", function (aEvent) {
