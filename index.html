@@ -229,11 +229,11 @@ h2 {
   <h3>選定基準</h3>
   <figure>
     <img src="./img/epa.jpg" width="320" height="169">
-    <figcaption><p>橘湾のエコパーク阿南(2014年-)</p><p class="photocredit"><a href="http://www.city.anan.tokushima.jp/docs/2010091700022/">Source</a></p></figcaption>
+    <figcaption><p>海に面したエコパーク阿南(2014年-)</p><p class="photocredit"><a href="http://www.city.anan.tokushima.jp/docs/2010091700022/">Source</a></p></figcaption>
   </figure>
   <p>徳島市の選定委員会が出した結論には、不可解な点がいくつかあります。徳島新聞の報道によれば、選定委員は「環境への配慮」、「有事の際の安全性」、「財政負担」の3つの面を基準にして選定された、としていますが、この3つの点には、どれも問題があります。</p>
 
-  <p>まず、環境についてですが、論田町から飯谷町に施設を移すのは、単純にいうと、勝浦川の下流にあるごみ焼却場を上流に移すということです。フェニックス計画が実施された大阪湾や夢の島がある東京湾など、他都道府県の例を見ても分かるように、ごみ処理は下流で行い、やむを得ない分は埋め立てて港湾として利用するのが大原則です。同じ川の上流に配置した方が環境に優しくなるという論理は、いくらなんでも無理があります。</p>
+  <p>まず、環境についてですが、論田町から飯谷町に施設を移すのは、単純にいうと、勝浦川の下流にあるごみ焼却場を上流に移すということです。フェニックス計画が実施された大阪湾や夢の島がある東京湾など、他都道府県の例を見ても分かるように、ごみ処理は下流で行い、やむを得ない分は埋め立てて港湾として利用するのが大原則です。お隣の阿南市では3年前から新しいごみ処理施設、エコパーク阿南が稼働していますが、これも定石通り、橘湾の沿岸に建てられています。同じ川の上流に配置した方が環境に優しくなるという論理は、いくらなんでも無理があるでしょう。</p>
 
   <p>次に、有事の際の安全性ですが、新旧のごみ焼却場が同じ川に面しているという点が問題になります。政府が掲げる広域での国土強靭化とは、ある地域で災害がおきて施設が使えなくなったときに、別の地域に施設があると災害の復旧に利するということです。しかるに、ゲリラ豪雨などで暴れ川である勝浦川が氾濫・落橋などの被害もたらせば、新旧のごみ処理場が同時に使えなくなる事態は容易に想定できますから、安定的な運用を目指す上では、新たなごみ処理施設は勝浦川から離れた場所にすべきです。</p>
 
@@ -490,12 +490,12 @@ function(aNode) {
 while(tw.nextNode()){}
 var figure = document.createElement("div");
 var caption = document.createElement("div");
-caption.textContent = "もくじ";
+caption.textContent = "目次";
 caption.id = "indexcap";
 figure.style.cssText = "text-align:left;float:left;border:thin solid skyblue;" +
                "margin-bottom: 1em;box-shadow:10px 11px 8px -7px #696e82;";
 caption.style.cssText = "text-align:center;cursor:pointer;min-width:25em;"+
-                        "color:blue;background-color:#eef;font-family:serif;padding:0.1em";
+                        "color:blue;background-color:#eef;font-weight:bold;padding:0.1em";
 caption.addEventListener("click", function (aEvent) {
   var list = document.getElementById("indexcap").nextSibling;
   list.classList.toggle("indexListDisplayNone");
